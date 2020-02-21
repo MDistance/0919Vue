@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>姓名操作</legend>
+            姓氏:
+            <input type="text" placeholder="请输入姓名" v-model="firstName"><br/>
+            名字:
+            <input type="text" placeholder="请输入名字" v-model="lastName"><br/>
+        </fieldset>
+        <fieldset>
+            <legend>单向和双向操作</legend>
+            姓名:(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br/>
+            姓名:(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br/>
+            姓名:(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br/>
+
+        </fieldset>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+    </div>
+    <script>
+        const vm=new Vue({
+            el:'#app',
+            data:{
+                firstName:'东方',
+                lastName:'不败',
+                fullName2:'最美的伤口'
+            },
+            //计算属性操作:只要属性的值发生改变,相关联的属性的值发生变化,
+            computed:{
+                fullName1(){
+                    console.log('---------fullname1--------')
+                    return this.firstName+'-'+this.lastName
+                },
+                fullName3:{
+                    get(){
+                        return this.firstName+'-'+this.lastName
+                    },
+                    set(val){
+                        const name=val.split('-')
+                        this.firstName=name[0]
+                        this.lastName=name[1]
+                    }
+                }
+            },
+            //监视:第一种写法
+            watch:{
+                firstName(val){
+                    this.fullName2=val+'-'+this.lastName
+                },
+                lastName(val){
+                    this.fullName2=val+'-'+this.lastName
+                }
+            }
+        })
+        //第二种写法:
+        // vm.$watch('lastName',function(val){//val就是lastname的值
+        //     //fullname2值变化
+        //     this.fullName2=this.firstName+'-'+val
+        // })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h2>插值</h2>
+        <p>需求1:显示插值数据</p>
+        <span>{{msg}}</span>
+        <p>需求2:显示插值的大写</p>
+        <span>{{msg.toUpperCase()}}</span>
+        <p>需求3:显示差值的反转内容</p>
+        <span>{{msg.split(' ').reverse().join(' ')}}</span>
+        <hr>
+        <h2>指令--强制数据绑定</h2>
+        <a href="url">百度</a>
+        <a v-bind:href="url">百度</a>
+        <p>下面的是简写的方式:v-bind这种方式:可以简写为:的形式</p>
+        <a :href="url"> 百度</a>
+        <hr>
+        <h2>事件监听</h2>
+        <button v-on:click="showMessage1">点击1</button>
+        <button v-on:click="showMessage2">点击2</button>
+        <button @click="showMessage3">点击3</button>
+    </div>
+
+    <script type="text/javascript">
+        const vm=new vue({
+            el:"#app",
+            data:{
+                msg:'世界美好与你环环相扣',
+                url:'http://www.baidu.com'
+            },
+           methods:{
+               handleClick(){
+                   alert('啊,被点击了');
+               },
+               handleClick2(e){
+                alert(e.target.innerHTML)
+            },
+           }
+        })
+    </script>
+</body>
+</html>

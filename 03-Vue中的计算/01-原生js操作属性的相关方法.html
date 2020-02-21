@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <script>
+        var person={
+            firstName:'东方',
+            lastName:'不败'
+        }
+        Object.defineProperty(person,'fullName',{
+            configurable:true,//设置该属性是否可以被重新定义,默认是false
+            enumerable:true,//该属性是否可以被枚举遍历,默认是false
+            //value:'哈哈',//设置该属性的默认值
+            //writable:true,//设置该属性是否可以被修改,默认是false
+            get(){//获取fullname属性的值------是firstName+lastName属性值
+                return this.firstName+'-'+this.lastName
+            },
+            set(val){
+                var name=val.split('-')//val====>欧阳-海珠
+                this.firstName=name[0]
+                this.lastName=name[1]
+            }
+        })
+        //为person对象添加了一个fullName属性
+        person.fullName=person.firstName+'-'+person.lastName
+        console.log(person.fullName+'=======')
+
+        //修改firstName和lastName属性值,fullName值是否改变
+        person.firstName='欧阳'
+        person.lastName='海珠'
+        console.log(person.fullName+'---------')
+
+        //修改fullname属性值,firstname和lastname的属性值是否改变
+        person.fullName='诸葛-孔明'
+        console.log(person.lastName)
+        console.log(person.firstName)
+
+    </script>
+    
+</body>
+</html>
